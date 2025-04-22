@@ -1,5 +1,8 @@
 # app/unittest/test_read.py
 
+#################
+## DEPRECIATED ##
+#################
 
 import unittest
 from unittest.mock import patch
