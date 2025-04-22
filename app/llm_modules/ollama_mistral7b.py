@@ -49,6 +49,44 @@ class OllamaMistral7B_Model():
         response.raise_for_status()
         return response.json()["response"].strip()
 
+    def transcribe_audio(self, audio_path: str, model: str = "") -> str:
+        """
+        
+
+        Args:
+            audio_path (str): Path to the local audio file.
+            model (str): model to use (default: "").
+
+        Returns:
+            str: The transcribed text.
+        """
+        # TODO
+        # Not implemented local transcribe model
+
+        return ""
+    
+    def text_to_speech(self, text: str, voice: str = "coral", instructions: str = "Speak in a cheerful and positive tone.", model: str = "") -> None:
+        """
+        Dummy implementation of text_to_speech.
+
+        Args:
+            text (str): The text to convert to speech.
+            voice (str): The voice to use for speech (default is "coral").
+            instructions (str): Instructions on how the speech should sound (default is "Speak in a cheerful and positive tone.").
+            model (str): Selected model, default gpt-4o-mini-tts
+        """
+        # TODO
+        # Not implemented local tts model
+
+        class DummyAudioResponse:
+            def iter_bytes(self, chunk_size=1024):
+                # Simulate an empty audio stream (just one empty chunk for structure)
+                yield b""
+
+        audio_response = DummyAudioResponse()
+        return audio_response.iter_bytes(chunk_size=1024)
+    
+
     def set_model(self, model: str) -> None:
         """
         Sets the model name used for inference.

@@ -21,14 +21,9 @@ class SupervisorAgent:
             print(f"\n\n ----- VALIDATOR -----\n\n ")
 
         # Initial validation
-        #prompt = f"""You are a Senior Suppervisor with years of experience given the following conversation between a customer and a customer support agent: 
-        #{conversation}"""
         prompt = self._format("role_intro", conversation=conversation)
         manager_conv = [{"role": "system", "content": prompt}]
 
-        #msg = f"""Given the conversation are this notes correct? Make sure the response to each category ({self.required_keys}) is correct and contains all the necesary information:
-        #{extracted}
-        #Anser with a 'Yes' or 'No'"""
         msg = self._format("notes_check", required_keys=self.required_keys, extracted=extracted)
         manager_conv.append({"role": "user", "content": msg})
 
@@ -41,7 +36,7 @@ class SupervisorAgent:
         if result.lower() != 'yes':
             # Incorrect information, finding errors and fixing
             # Attempt to fix
-            fix_prompt = self.prompts["fix_prompt"]#"Can you fix the notes with the conversation? Only do it if you have all the information. Answer with a 'Yes' or 'No'"
+            fix_prompt = self.prompts["fix_prompt"]
             manager_conv.append({"role": "user", "content": fix_prompt})
             
             result = self.model.chat(manager_conv)
@@ -54,7 +49,7 @@ class SupervisorAgent:
             if result.lower() != 'yes':
                 # The conversation doest have all the information needed, Ask which categories are incorrect
                 # Ask for incorrect fields
-                categories_prompt = self._format("which_incorrect", required_keys=self.required_keys)#f"Can you tell me which of the categories: {self.required_keys} are incorrect? Just return me the names as a python list ['number1','number2',...]"
+                categories_prompt = self._format("which_incorrect", required_keys=self.required_keys)
                 manager_conv.append({"role": "user", "content": categories_prompt})
                 
                 result = self.model.chat(manager_conv)
@@ -79,7 +74,7 @@ class SupervisorAgent:
             else:
                 # Fix and update dict
                 # Try fixing the notes
-                fix_notes_prompt = self._format("fix_notes", required_keys=self.required_keys) #f"Can you fix the categories ({self.required_keys}) that are incorrect in the notes, using the conversation? Just return me the updates notes as a python dictionary {{'number1':'value','number2':'value',...}}"
+                fix_notes_prompt = self._format("fix_notes", required_keys=self.required_keys)
                 manager_conv.append({"role": "user", "content": fix_notes_prompt})
                 
                 result = self.model.chat(manager_conv)

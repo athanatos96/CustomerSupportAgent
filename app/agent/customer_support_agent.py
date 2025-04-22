@@ -27,10 +27,11 @@ REQUIRED_KEYS = ["order_number", "category", "description", "urgency"]
 class CustomerSupportAgent:
     check_every_n_msg = 3 # After how many msg the suppervisor is going to check the work of the customer agent
     cached_order_logs = None
-    def __init__(self, model, mode: Literal["rigid", "natural"] = "rigid", company: str = "ExampleCorp", lang: str = "en", verbose:bool = False, read_silence_duration:float= 2.0, read_max_duration:int = 60, read_silence_threshold:int = 5) -> None:
+    def __init__(self, model, mode: Literal["rigid", "natural"] = "rigid", company: str = "ExampleCorp", audio_mode:bool = True, lang: str = "en", verbose:bool = False, read_silence_duration:float= 2.0, read_max_duration:int = 60, read_silence_threshold:int = 5) -> None:
         self.model = model
         self.mode = mode
         self.company = company
+        self.audio_mode = audio_mode
         self.verbose = verbose
         self.lang = lang
         self.prompts = load_prompts("customer_support", lang)
@@ -39,7 +40,7 @@ class CustomerSupportAgent:
         self.full_conversation = [] # Contains all the notes
         self.extracted = {}
         self.supervisor = SupervisorAgent(model, REQUIRED_KEYS, lang, verbose)
-        self.userIO = UserIO(model, verbose,silence_duration=read_silence_duration, max_duration=read_max_duration,silence_threshold=read_silence_threshold)# Needed for text/audio input/ouputs comunications
+        self.userIO = UserIO(model, verbose, silence_duration=read_silence_duration, max_duration=read_max_duration,silence_threshold=read_silence_threshold)# Needed for text/audio input/ouputs comunications
         
 
 
@@ -62,15 +63,15 @@ class CustomerSupportAgent:
         }"""
         questions = self.prompts["questions"]
 
-        self.conversation.append({"role": "developer", "content": self.prompts["system_prompt"]}) #self.conversation.append({"role": "developer", "content": SYSTEM_PROMPT})
+        self.conversation.append({"role": "developer", "content": self.prompts["system_prompt"]}) 
 
         for key, q in questions.items():
             while True:
                 convo_input = {"role": "assistant", "content": q}
                 if self.verbose:
                     print("\n")
-                self.userIO.write(f"🤖 {q}", audio=True)
-                user_input = self.userIO.read("> ", audio=True)
+                self.userIO.write(f"🤖 {q}", audio=self.audio_mode)
+                user_input = self.userIO.read("> ", audio=self.audio_mode)
 
                 convo_user = {"role": "user", "content": user_input}
                 self.conversation.extend([convo_input, convo_user])
@@ -78,7 +79,7 @@ class CustomerSupportAgent:
                 validate_prompt = self.conversation + [
                     {
                         "role": "developer",
-                        "content": self.prompts["validation_instruction"].format(key=key, invalid_response="INVALID") #f"Was the user's last response a valid '{key}'? If so, return ONLY the cleaned value. If not, respond with 'INVALID'.",
+                        "content": self.prompts["validation_instruction"].format(key=key, invalid_response="INVALID") 
                     }
                 ]
                 result = self.model.chat(validate_prompt)
@@ -89,17 +90,17 @@ class CustomerSupportAgent:
                     self.extracted[key] = result
                     break
                 else:
-                    self.userIO.write(self.prompts["invalid_input"], audio=True)#write("⚠️ Hmm, I didn't catch that. Let's try again...", audio=False)
+                    self.userIO.write(self.prompts["invalid_input"], audio=self.audio_mode)
 
         summary_prompt = self.conversation + [
-            {"role": "developer", "content": self.prompts["summary_instruction"]}#{"role": "developer", "content": "Summarize the customer's issue briefly."}
+            {"role": "developer", "content": self.prompts["summary_instruction"]}
         ]
         summary = self.model.chat(summary_prompt)
 
 
         # Find Customer frustration
         frustration_prompt = self.conversation + [
-            {"role": "developer", "content": self.prompts["customer_frustration"]}#{"role": "developer", "content": "Summarize the customer's issue briefly."}
+            {"role": "developer", "content": self.prompts["customer_frustration"]}
         ]
         frustration_score = self.model.chat(frustration_prompt)
         if self.verbose:
@@ -119,15 +120,15 @@ class CustomerSupportAgent:
         # Save the conversation + the info extracted + summary to json + frustration score
         save_conversation(self.extracted, self.conversation, summary, "natural", frustration_score,  self.lang)
 
-        self.userIO.write(self.prompts["extracted_info"].format(extracted=self.extracted), audio=True)#write(f"\n✅ extracted info:\n{self.extracted}", audio=False)
-        self.userIO.write(self.prompts["summary_prefix"].format(summary=summary), audio=True) #write(f"\n✅ Summary:\n{summary}", audio=False)
+        self.userIO.write(self.prompts["extracted_info"].format(extracted=self.extracted), audio=self.audio_mode)
+        self.userIO.write(self.prompts["summary_prefix"].format(summary=summary), audio=self.audio_mode) 
 
     def _start_natural(self):
-        welcome = self.prompts["welcome"].format(company=self.company) #f"Hi! Welcome to {self.company} customer support. How can I help you today regarding your order?"
+        welcome = self.prompts["welcome"].format(company=self.company) 
         if self.verbose:
             print("\n")
-        self.userIO.write(f"🤖 {welcome}", audio = True)
-        self.full_conversation.append({"role": "system", "content": self.prompts["system_prompt"]}) #self.conversation.append({"role": "system", "content": SYSTEM_PROMPT})
+        self.userIO.write(f"🤖 {welcome}", audio = self.audio_mode)
+        self.full_conversation.append({"role": "system", "content": self.prompts["system_prompt"]}) 
         self.full_conversation.append({"role": "assistant", "content": welcome})
 
         msgs_count = 1 # count the msg wiht the user
@@ -136,12 +137,12 @@ class CustomerSupportAgent:
             # remove all past developer comments, this is done to track only the conversation + the last notes
             self.conversation = self.remove_developer_notes() # clean previous developer coments, and add the new ones
 
-            user_input = self.userIO.read("> ", audio=True)
+            user_input = self.userIO.read("> ", audio=self.audio_mode)
             self.full_conversation.append({"role": "user", "content": user_input})
             self.conversation.append({"role": "user", "content": user_input})
 
 
-            msg = self.prompts["partial_notes"].format(extracted=self.extracted) #f"So far this are the notes that you have taken: {self.extracted}"
+            msg = self.prompts["partial_notes"].format(extracted=self.extracted) 
             self.full_conversation.append({"role": "developer", "content":msg})
             self.conversation.append({"role": "developer", "content":msg}) # Add the notes also to the conversation, so that the extraction have context on the notes
 
@@ -154,7 +155,7 @@ class CustomerSupportAgent:
                 extract_prompt = self.conversation + [
                     {
                         "role": "developer",
-                        "content": self.prompts["validation_instruction"].format(key=key, invalid_response="NONE") #f"Was the user's last response a valid '{key}'? If so, return ONLY the cleaned value. If not, respond with 'NONE'."
+                        "content": self.prompts["validation_instruction"].format(key=key, invalid_response="NONE") 
                     }
                 ]
                 result = self.model.chat(extract_prompt)
@@ -169,10 +170,10 @@ class CustomerSupportAgent:
                 validation = self.supervisor.validate(self.conversation, self.extracted)
                 if validation:
                     # Correct we stop
-                    self.userIO.write(f"🤖 {self.prompts["thanks_message"]}", audio=True) #write(f"🤖 Thanks for all the information. I will escalate the issue immediately, and will get back to you with a response", audio=False)
+                    self.userIO.write(f"🤖 {self.prompts["thanks_message"]}", audio=self.audio_mode) 
                     break
                 else:
-                    msg = self.prompts["supervisor_correction"].format(extracted=self.extracted, required_keys=REQUIRED_KEYS)#f"There is missing information in your previous notes or they are incorrect. So your suppervisor has corrected them. Please make sure to ask the user for the missing information in your notes: {self.extracted}. This are the elements that you need: REQUIRED_KEYS"
+                    msg = self.prompts["supervisor_correction"].format(extracted=self.extracted, required_keys=REQUIRED_KEYS)
                     self.full_conversation.append({"role": "developer", "content":msg})
                     self.conversation.append({"role": "developer", "content":msg})
 
@@ -187,7 +188,7 @@ class CustomerSupportAgent:
             assistant_reply = self.model.chat(self.conversation)
             self.full_conversation.append({"role": "assistant", "content": assistant_reply})
             self.conversation.append({"role": "assistant", "content": assistant_reply})
-            self.userIO.write(f"🤖 {assistant_reply}", audio=True)
+            self.userIO.write(f"🤖 {assistant_reply}", audio=self.audio_mode)
             if self.verbose:
                 print(f"[DEBUG] \n MODEL Prompt: {self.conversation} \n assistant_reply: {assistant_reply}")
                 print("\n")
@@ -196,16 +197,16 @@ class CustomerSupportAgent:
         # End loop
 
         self.conversation = self.remove_developer_notes() # Remove all the developer notes, since those are auxiliary msg to add context to the model, but not important for the summary
-        msg = self.prompts["partial_notes"].format(extracted=self.extracted) #f"So far this are the notes that you have taken: {self.extracted}"
+        msg = self.prompts["partial_notes"].format(extracted=self.extracted) 
         self.conversation.append({"role": "developer", "content":msg})
         summary_prompt = self.conversation + [
-            {"role": "developer", "content": self.prompts["summary_instruction"]}#{"role": "developer", "content": "Summarize the customer's issue briefly."}
+            {"role": "developer", "content": self.prompts["summary_instruction"]}
         ]
         summary = self.model.chat(summary_prompt)
 
         # Find Customer frustration
         frustration_prompt = self.conversation + [
-            {"role": "assistant", "content": self.prompts["customer_frustration"]}#{"role": "developer", "content": "Summarize the customer's issue briefly."}
+            {"role": "assistant", "content": self.prompts["customer_frustration"]}
         ]
         frustration_score = self.model.chat(frustration_prompt)
         if self.verbose:
@@ -225,8 +226,8 @@ class CustomerSupportAgent:
         # Save the conversation + the info extracted + summary to json + frustration score
         save_conversation(self.extracted, self.conversation, summary, "natural", frustration_score,  self.lang)
         
-        self.userIO.write(self.prompts["extracted_info"].format(extracted=self.extracted), audio=True)#write(f"\n✅ extracted info:\n{self.extracted}", audio=False)
-        self.userIO.write(self.prompts["summary_prefix"].format(summary=summary), audio=True)#write(f"\n✅ Summary:\n{summary}", audio=False)
+        self.userIO.write(self.prompts["extracted_info"].format(extracted=self.extracted), audio=self.audio_mode)
+        self.userIO.write(self.prompts["summary_prefix"].format(summary=summary), audio=self.audio_mode)
 
 
     def remove_developer_notes(self):
@@ -252,7 +253,7 @@ class CustomerSupportAgent:
         if order_id in list_all_orders():
             previous_data = load_conversations(order_id)
 
-            msg = self.prompts["history_msg"].format(order_id=order_id) # f"📜 Previous conversation history for order {order_id}:"
+            msg = self.prompts["history_msg"].format(order_id=order_id) 
             for conv in previous_data:
                 timestamp_log = conv.get("timestamp", "")
                 conversation_log = conv.get("conversation", "")

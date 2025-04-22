@@ -1,9 +1,11 @@
 from app.llm_modules.open_ai import OpenAI_Model
+from app.llm_modules.ollama_mistral7b import OllamaMistral7B_Model
 from app.agent.customer_support_agent import CustomerSupportAgent
 
 
 MODE = "natural" # Supported mode natural/rigid (rigid is a more direct conversation, only using llms to extract information from user response)
 COMPANY_NAME = "TechSavvy Inc." # Just a random company name for the prompts
+AUDIO_MODE = True # If true conversation is done by audio call, if False conversation is done by text
 LANG = "en" # Supported lang en/es 
 VERBOSE = False # In order to allow debug comments to see full prompts, responses, and usefull extra info
 READ_SILENCE_DURATION = 2.0 # Seconds the bot is waiting. How long to wait in seconds before stopping on silence.
@@ -15,10 +17,13 @@ if __name__ == "__main__":
 
 
     model = OpenAI_Model()
+    # Can also use the model = OllamaMistral7B_Model() Local model. (Only supports AUDIO_MODE = False)
+
 
     agent = CustomerSupportAgent(model=model, 
                                  mode=MODE, 
                                  company=COMPANY_NAME, 
+                                 audio_mode = AUDIO_MODE,
                                  lang = LANG,
                                  verbose=VERBOSE,
                                  read_silence_duration = READ_SILENCE_DURATION,
