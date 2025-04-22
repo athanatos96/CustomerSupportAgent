@@ -3,7 +3,7 @@
 #################
 ## DEPRECIATED ##
 #################
-
+# Use test_user_io.py instead
 
 import unittest
 from io import StringIO
