@@ -191,7 +191,7 @@ The system architecture of the Customer Support Bot consists of several intercon
    - The code includes error handling mechanisms for situations like failed audio transcription, ensuring that the system doesn't crash unexpectedly. Additionally, the audio file is cleaned up after processing to avoid unnecessary file accumulation.
 
 ### 5. Rigid / Natural mode:
-    - The bot operates in either "rigid" mode (strict question flow) or "natural" mode (more conversational and flexible).
+   - The bot operates in either "rigid" mode (strict question flow) or "natural" mode (more conversational and flexible).
 
 
 ---
