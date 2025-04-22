@@ -1,0 +1,57 @@
+[
+  {
+    "timestamp": "2025-04-22T02:37:50.119938",
+    "mode": "natural",
+    "conversation": [
+      {
+        "role": "system",
+        "content": "Eres un agente de soporte al cliente llamado SupportBot. \nHaz preguntas una por una para recopilar:\n- n\u00famero de pedido (por ejemplo: ORD12345)\n- categor\u00eda (env\u00edo, facturaci\u00f3n, producto)\n- descripci\u00f3n (breve explicaci\u00f3n)\n- urgencia (baja, media, alta)\nSi ya tienes parte de la informaci\u00f3n, no repitas las preguntas, excepto si el usuario ha proporcionado un formato incorrecto (por ejemplo, en el n\u00famero de pedido; en ese caso, puedes pedirle que lo corrija).\nPregunta de forma natural y solo una cosa a la vez."
+      },
+      {
+        "role": "assistant",
+        "content": "\u00a1Hola! Bienvenido al soporte de TechSavvy Inc.. \u00bfEn qu\u00e9 puedo ayudarte hoy con respecto a tu pedido?"
+      },
+      {
+        "role": "user",
+        "content": "Hola, tengo un problema con respecto a mi pedido. No funciona, o sea, ha llegado el producto, pero se ha estropeado."
+      },
+      {
+        "role": "assistant",
+        "content": "Gracias por la informaci\u00f3n. Para poder ayudarte mejor, \u00bfpodr\u00edas proporcionarme el n\u00famero de pedido, por favor?"
+      },
+      {
+        "role": "user",
+        "content": "S\u00ed, mi pedido es ORD154798."
+      },
+      {
+        "role": "assistant",
+        "content": "Perfecto, gracias. \u00bfPodr\u00edas decirme a qu\u00e9 categor\u00eda corresponde tu problema? Puede ser env\u00edo, facturaci\u00f3n o producto."
+      },
+      {
+        "role": "user",
+        "content": "El problema es con el producto."
+      },
+      {
+        "role": "assistant",
+        "content": "Gracias por la informaci\u00f3n. Para poder ayudarte mejor, \u00bfpodr\u00edas darme una breve descripci\u00f3n del problema con el producto?"
+      },
+      {
+        "role": "user",
+        "content": "S\u00ed, ped\u00ed una tablet y no funciona, no se enciende. La he cargado y no funciona. Est\u00e1 estropeada. Y aparte tiene la pantalla rayada."
+      },
+      {
+        "role": "developer",
+        "content": "Hasta ahora, estas son las notas que has tomado. Usa estas notas para dirigir tus preguntas hacia la informaci\u00f3n que falta. Recuerda que ciertos campos requieren formatos espec\u00edficos: {'order_number': 'ORD154798', 'category': 'product', 'description': 'el producto lleg\u00f3 estropeado y con la pantalla rayada, no funciona y no se enciende.', 'urgency': 'high'}"
+      }
+    ],
+    "extracted": {
+      "order_number": "ORD154798",
+      "category": "product",
+      "description": "el producto lleg\u00f3 estropeado y con la pantalla rayada, no funciona y no se enciende.",
+      "urgency": "high"
+    },
+    "summary": "El cliente recibi\u00f3 una tablet que no funciona, no se enciende a pesar de estar cargada, est\u00e1 estropeada y adem\u00e1s tiene la pantalla rayada. La urgencia parece ser alta debido a la naturaleza del problema. \u00bfQuieres que contin\u00fae ayud\u00e1ndote con esto?",
+    "frustration_score": 6,
+    "lang": "es"
+  }
+]

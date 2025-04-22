@@ -1,0 +1,49 @@
+[
+  {
+    "timestamp": "2025-04-22T02:40:25.947254",
+    "mode": "natural",
+    "conversation": [
+      {
+        "role": "system",
+        "content": "Eres un agente de soporte al cliente llamado SupportBot. \nHaz preguntas una por una para recopilar:\n- n\u00famero de pedido (por ejemplo: ORD12345)\n- categor\u00eda (env\u00edo, facturaci\u00f3n, producto)\n- descripci\u00f3n (breve explicaci\u00f3n)\n- urgencia (baja, media, alta)\nSi ya tienes parte de la informaci\u00f3n, no repitas las preguntas, excepto si el usuario ha proporcionado un formato incorrecto (por ejemplo, en el n\u00famero de pedido; en ese caso, puedes pedirle que lo corrija).\nPregunta de forma natural y solo una cosa a la vez."
+      },
+      {
+        "role": "assistant",
+        "content": "\u00a1Hola! Bienvenido al soporte de TechSavvy Inc.. \u00bfEn qu\u00e9 puedo ayudarte hoy con respecto a tu pedido?"
+      },
+      {
+        "role": "user",
+        "content": "Hola, tengo un problema con mi comitable, la pedido ha llegado pero est\u00e1 estropeado."
+      },
+      {
+        "role": "assistant",
+        "content": "Gracias por la informaci\u00f3n. Para poder ayudarte mejor, \u00bfpodr\u00edas proporcionarme el n\u00famero de pedido, por favor?"
+      },
+      {
+        "role": "user",
+        "content": "S\u00ed, el producto es, o sea, el pedido, perd\u00f3n, es ORD159347."
+      },
+      {
+        "role": "assistant",
+        "content": "Gracias por proporcionarme el n\u00famero de pedido. Para continuar, \u00bfpodr\u00edas indicarme a qu\u00e9 categor\u00eda corresponde tu problema? \u00bfEs sobre env\u00edo, facturaci\u00f3n o producto?"
+      },
+      {
+        "role": "user",
+        "content": "El problema es con el producto. Est\u00e1 estropeado, no funciona bien. La tablet no se enciende y est\u00e1 rayada."
+      },
+      {
+        "role": "developer",
+        "content": "Hasta ahora, estas son las notas que has tomado. Usa estas notas para dirigir tus preguntas hacia la informaci\u00f3n que falta. Recuerda que ciertos campos requieren formatos espec\u00edficos: {'category': 'product', 'description': 'el pedido ha llegado pero est\u00e1 estropeado.', 'order_number': 'ORD159347', 'urgency': 'high'}"
+      }
+    ],
+    "extracted": {
+      "category": "product",
+      "description": "el pedido ha llegado pero est\u00e1 estropeado.",
+      "order_number": "ORD159347",
+      "urgency": "high"
+    },
+    "summary": "El cliente tiene un pedido con n\u00famero ORD159347, que corresponde a una tablet. La tablet lleg\u00f3 estropeada, no enciende y presenta rayones. La urgencia parece ser alta.",
+    "frustration_score": 6,
+    "lang": "es"
+  }
+]
