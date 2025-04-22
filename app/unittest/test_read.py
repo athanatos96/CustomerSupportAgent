@@ -3,6 +3,7 @@
 #################
 ## DEPRECIATED ##
 #################
+# Use test_user_io.py instead
 
 import unittest
 from unittest.mock import patch
