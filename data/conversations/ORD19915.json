@@ -1,0 +1,61 @@
+[
+  {
+    "timestamp": "2025-04-22T02:18:44.410489",
+    "mode": "rigid",
+    "conversation": [
+      {
+        "role": "developer",
+        "content": "You are a friendly customer support agent called SupportBot. \nAsk questions one by one to collect:\n- order number (e.g. ORD12345)\n- category (shipping, billing, product)\n- description (brief explanation)\n- urgency (low, medium, high)\nIf you already have some info, don't repeat questions, except if the user is giving incorrect format (for example in the order number, in this case you can ask it to give the correct one).\nAsk naturally and one thing at a time."
+      },
+      {
+        "role": "assistant",
+        "content": "What is your order number?"
+      },
+      {
+        "role": "user",
+        "content": "ORD1"
+      },
+      {
+        "role": "assistant",
+        "content": "What is your order number?"
+      },
+      {
+        "role": "user",
+        "content": "ORD19915"
+      },
+      {
+        "role": "assistant",
+        "content": "What issue are you experiencing (shipping, billing, product)?"
+      },
+      {
+        "role": "user",
+        "content": "ITS A PRODUCT PROBLEM, its a different color"
+      },
+      {
+        "role": "assistant",
+        "content": "Can you briefly describe the issue?"
+      },
+      {
+        "role": "user",
+        "content": "i got a different color notebook from the one i ordered"
+      },
+      {
+        "role": "assistant",
+        "content": "How urgent is this? (low, medium, high)"
+      },
+      {
+        "role": "user",
+        "content": "low"
+      }
+    ],
+    "extracted": {
+      "order_number": "ORD19915",
+      "category": "product",
+      "description": "A different color notebook was received from the one ordered.",
+      "urgency": "low"
+    },
+    "summary": "Customer received a notebook in a different color than what was ordered.",
+    "frustration_score": 2,
+    "lang": "en"
+  }
+]

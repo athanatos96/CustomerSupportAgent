@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  my_python_app:
+    build: .
+    image: customer_support_bot:latest
+    container_name: customerSupportBot_con
+    stdin_open: true
+    tty: true
+    environment:
+      - OPENAI_API_KEY
+      - PULSE_SERVER=unix:/tmp/pulse_socket
+    volumes:
+      - .:/app
+      - /tmp/.X11-unix:/tmp/.X11-unix
+      - /run/user/${UID}/pulse/native:/tmp/pulse_socket
+      - ~/.config/pulse/cookie:/root/.config/pulse/cookie
+    #devices:
+      #- /dev/snd  # Access to sound device
+    command: bash  # Start with CLI, can run main.py inside

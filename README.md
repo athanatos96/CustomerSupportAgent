@@ -15,7 +15,9 @@ This project implements a conversational AI-powered customer support bot that co
 
 ## Setup Instructions
 
-### Prerequisites
+### Option 1: **from source**
+
+#### Prerequisites
 
 Before setting up the project, make sure you have the following dependencies:
 
@@ -31,7 +33,7 @@ Before setting up the project, make sure you have the following dependencies:
 - **LLM Model**: The system requires an LLM model for audio transcription and text-to-speech conversion. This should be integrated in the `UserIO` class, specifically the `llm_model` argument. Local mode using Mistral 7B running with Ollama (Do not support TTS or STT) and Cloud mode using openAI API. This means that you will need a `OPENAI_API_KEY` enviroment variable, with a valid KEY. Default mode OpenAI (Since local model is small 7b performance is really low, recomended cloud)
 
 
-### Installing and Running
+#### Installing and Running
 
 1. **Clone the Repository**:
 ```bash
@@ -72,6 +74,55 @@ Before setting up the project, make sure you have the following dependencies:
    If you’re using audio input, make sure the microphone is properly configured and audio mode is enabled.
 
 ---
+
+### Option 2: **Docker**
+
+#### Prerequisites
+
+- **Docker installed**: Have docker installed and running
+
+- **LLM Model OPENAI_API_KEY env vars**: The system requires an LLM model for audio transcription and text-to-speech conversion. This should be integrated in the `UserIO` class, specifically the `llm_model` argument. Local mode using Mistral 7B running with Ollama (Do not support TTS or STT) and Cloud mode using openAI API. This means that you will need a `OPENAI_API_KEY` enviroment variable, with a valid KEY. Default mode OpenAI (Since local model is small 7b performance is really low, recomended cloud)
+
+- **Audio Input Setup**: NOT Supported, set `AUDIO_MODE` to False in `main.py`, if running docker from windows. Not tested in running docker from linux (uncomment the `devices` in docker-compose.yml and try)
+
+#### Installing and Running
+
+1. **Clone the Repository**:
+```bash
+   git clone <repository_url>
+   cd <project_directory>
+```
+
+2. **Run docker compose**:
+    Run the following command to create docker image and container:
+```bash
+   docker-compose up --build
+```
+
+3. **Exec into the docker container**:
+    In a new terminal Run the following command to exec into the docker container:
+```bash
+   docker exec -it customerSupportBot_con bash
+```
+
+4. **Run the code**:
+    In a new terminal Run the following command to run the code (make sure to have set up `AUDIO_MODE=False` in `main.py`)
+```bash
+   python main.py
+```
+
+### Option 3: **Executable**
+1. **Run executable**:
+```bash
+   SupportBot.exe
+```
+
+To build the executable run (need to run in a virtual env, check Option 1)
+```bash
+pyinstaller --onefile --name SupportBot --add-data "app/prompts;app/prompts" main.py
+```
+then copy the dist/SupportBot.exe to the main folder
+
 
 ## System Architecture Overview
 

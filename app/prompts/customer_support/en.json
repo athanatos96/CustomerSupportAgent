@@ -16,6 +16,7 @@
     "history_msg":"📜 Previous conversation history for order {order_id}:",
     "customer_frustration":"Given the following conversation, assign a frustration score from 0 to 10, where 0 represents no frustration and 10 indicates the customer is extremely frustrated (e.g., on the verge of taking legal action). Do not respond to the conversation itself, just return a numerical score between 0 and 10. Answer with a 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10",
     "summary_prefix": "\n✅ Summary:\n{summary}",
-    "extracted_info": "\n✅ extracted info:\n{extracted}"
+    "extracted_info": "\n✅ extracted info:\n{extracted}",
+    "frustration_info": "\n✅ Customer frustration:\n{frustration_score}"
   }
   

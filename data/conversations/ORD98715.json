@@ -1,0 +1,112 @@
+[
+  {
+    "timestamp": "2025-04-22T09:12:28.317938",
+    "mode": "natural",
+    "conversation": [
+      {
+        "role": "system",
+        "content": "You are a friendly customer support agent called SupportBot. \nAsk questions one by one to collect:\n- order number (e.g. ORD12345)\n- category (shipping, billing, product)\n- description (brief explanation)\n- urgency (low, medium, high)\nIf you already have some info, don't repeat questions, except if the user is giving incorrect format (for example in the order number, in this case you can ask it to give the correct one).\nAsk naturally and one thing at a time."
+      },
+      {
+        "role": "assistant",
+        "content": "Hi! Welcome to TechSavvy Inc. customer support. How can I help you today regarding your order?"
+      },
+      {
+        "role": "user",
+        "content": "I have a problem with my order ORD98715, the package is broken, i was expecting to get a fine chair, and is broken in half."
+      },
+      {
+        "role": "assistant",
+        "content": "I'm sorry to hear about the issue with your order. To assist you better, could you please tell me the category of your problem? Is it related to shipping, billing, or the product itself?"
+      },
+      {
+        "role": "user",
+        "content": "Its a problem with the product"
+      },
+      {
+        "role": "assistant",
+        "content": "Thank you for that information. Could you please briefly describe the problem with the product? You mentioned the package was broken in half, but is there any damage to the chair itself or any other specific issue?"
+      },
+      {
+        "role": "user",
+        "content": "to the chair, is broken"
+      },
+      {
+        "role": "assistant",
+        "content": "Thank you for sharing that. To proceed, could you please tell me how urgent this issue is for you? Would you say it's low, medium, or high priority?"
+      },
+      {
+        "role": "user",
+        "content": "Medium"
+      },
+      {
+        "role": "developer",
+        "content": "So far these are the notes that you have taken, please use this notes to dirrect your questions to the missing information, remember that certain fields need specific formats: {'order_number': 'ORD98715', 'description': 'the chair is broken.', 'category': 'product', 'urgency': 'medium'}"
+      }
+    ],
+    "extracted": {
+      "order_number": "ORD98715",
+      "description": "the chair is broken.",
+      "category": "product",
+      "urgency": "medium"
+    },
+    "summary": "The customer has an order with the number ORD98715, and the product\u2014a chair\u2014arrived broken in half. The issue is related to the product itself, and the urgency is medium.",
+    "frustration_score": 3,
+    "lang": "en"
+  },
+  {
+    "timestamp": "2025-04-22T09:15:36.797869",
+    "mode": "natural",
+    "conversation": [
+      {
+        "role": "system",
+        "content": "You are a friendly customer support agent called SupportBot. \nAsk questions one by one to collect:\n- order number (e.g. ORD12345)\n- category (shipping, billing, product)\n- description (brief explanation)\n- urgency (low, medium, high)\nIf you already have some info, don't repeat questions, except if the user is giving incorrect format (for example in the order number, in this case you can ask it to give the correct one).\nAsk naturally and one thing at a time."
+      },
+      {
+        "role": "assistant",
+        "content": "Hi! Welcome to TechSavvy Inc. customer support. How can I help you today regarding your order?"
+      },
+      {
+        "role": "user",
+        "content": "i i have a problem with order ORD98715, i need to do something with this broken chair? Will i get a new one?"
+      },
+      {
+        "role": "assistant",
+        "content": "Thanks for sharing that. To help you better, could you please tell me what specific action you're looking for? Are you requesting a replacement, a refund, or something else?"
+      },
+      {
+        "role": "user",
+        "content": "replacement"
+      },
+      {
+        "role": "assistant",
+        "content": "Got it. To proceed with the replacement request, I just need to confirm a couple of details. Could you please tell me the category of your issue? Is it related to shipping, billing, or the product itself?"
+      },
+      {
+        "role": "user",
+        "content": "product"
+      },
+      {
+        "role": "assistant",
+        "content": "Thank you for that. To move forward with your replacement request, could you please tell me how urgent this issue is for you? Would you say it's low, medium, or high priority?"
+      },
+      {
+        "role": "user",
+        "content": "medium"
+      },
+      {
+        "role": "developer",
+        "content": "So far these are the notes that you have taken, please use this notes to dirrect your questions to the missing information, remember that certain fields need specific formats: {'order_number': 'ORD98715', 'category': 'product', 'description': 'replacement', 'urgency': 'medium'}"
+      }
+    ],
+    "extracted": {
+      "order_number": "ORD98715",
+      "category": "product",
+      "description": "replacement",
+      "urgency": "medium"
+    },
+    "summary": "The customer has an issue with order ORD98715, specifically regarding a broken chair, and they are requesting a replacement. The urgency of this issue is medium.",
+    "frustration_score": 2,
+    "lang": "en"
+  }
+]

@@ -109,10 +109,11 @@ class CustomerSupportAgent:
 
 
         # Save the conversation + the info extracted + summary to json + frustration score
-        save_conversation(self.extracted, self.conversation, summary, "natural", frustration_score,  self.lang)
+        save_conversation(self.extracted, self.conversation, summary, "rigid", frustration_score,  self.lang)
 
         self.userIO.write(self.prompts["extracted_info"].format(extracted=self.extracted), audio=self.audio_mode)
         self.userIO.write(self.prompts["summary_prefix"].format(summary=summary), audio=self.audio_mode) 
+        self.userIO.write(self.prompts["frustration_info"].format(frustration_score=frustration_score), audio=self.audio_mode)
 
     def _start_natural(self):
         welcome = self.prompts["welcome"].format(company=self.company) 
@@ -219,6 +220,7 @@ class CustomerSupportAgent:
         
         self.userIO.write(self.prompts["extracted_info"].format(extracted=self.extracted), audio=self.audio_mode)
         self.userIO.write(self.prompts["summary_prefix"].format(summary=summary), audio=self.audio_mode)
+        self.userIO.write(self.prompts["frustration_info"].format(frustration_score=frustration_score), audio=self.audio_mode)
 
 
     def remove_developer_notes(self):

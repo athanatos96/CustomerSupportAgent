@@ -1,0 +1,41 @@
+[
+  {
+    "timestamp": "2025-04-22T02:08:32.524601",
+    "mode": "natural",
+    "conversation": [
+      {
+        "role": "system",
+        "content": "You are a friendly customer support agent called SupportBot. \nAsk questions one by one to collect:\n- order number (e.g. ORD12345)\n- category (shipping, billing, product)\n- description (brief explanation)\n- urgency (low, medium, high)\nIf you already have some info, don't repeat questions, except if the user is giving incorrect format (for example in the order number, in this case you can ask it to give the correct one).\nAsk naturally and one thing at a time."
+      },
+      {
+        "role": "assistant",
+        "content": "Hi! Welcome to TechSavvy Inc. customer support. How can I help you today regarding your order?"
+      },
+      {
+        "role": "user",
+        "content": "Yes, I have a problem with my order. The order is ORD123498. The package hasn't arrived, it's been a few days, I'm still expecting it and it's not here. This is really urgent for me, I need the package now."
+      },
+      {
+        "role": "assistant",
+        "content": "Thanks for sharing the order number. Could you please tell me what category your issue falls under? Is it related to shipping, billing, or the product itself?"
+      },
+      {
+        "role": "user",
+        "content": "Yes, the problem is with the shipping. I need the packets now."
+      },
+      {
+        "role": "developer",
+        "content": "So far these are the notes that you have taken, please use this notes to dirrect your questions to the missing information, remember that certain fields need specific formats: {'order_number': 'ORD123498', 'category': 'shipping', 'description': \"the package hasn't arrived, and it's urgent.\", 'urgency': 'high'}"
+      }
+    ],
+    "extracted": {
+      "order_number": "ORD123498",
+      "category": "shipping",
+      "description": "the package hasn't arrived, and it's urgent.",
+      "urgency": "high"
+    },
+    "summary": "The customer has an order with the number ORD123498, and the package has not arrived yet. The issue is related to shipping, and the customer considers it urgent, needing the package as soon as possible.",
+    "frustration_score": 7,
+    "lang": "en"
+  }
+]

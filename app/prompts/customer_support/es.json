@@ -16,6 +16,7 @@
   "history_msg":"📜 istorial de conversación anterior para el pedido {order_id}:",
   "customer_frustration": "Dada la siguiente conversación, asigna un nivel de frustración del cliente del 0 al 10, donde 0 representa que no hay frustración y 10 indica que el cliente está extremadamente frustrado (por ejemplo, a punto de tomar acciones legales). No respondas a la conversación, solo devuelve un número del 0 al 10. Responde con un 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 o 10",
   "summary_prefix": "\n✅ Resumen:\n{summary}",
-  "extracted_info": "\n✅ Información extraída:\n{extracted}"
+  "extracted_info": "\n✅ Información extraída:\n{extracted}",
+  "frustration_info": "\n✅ Frustracion del cliente:\n{frustration_score}"
   }
   

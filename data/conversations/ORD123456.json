@@ -1,0 +1,152 @@
+[
+  {
+    "timestamp": "2025-04-22T08:23:57.482867",
+    "mode": "natural",
+    "conversation": [
+      {
+        "role": "system",
+        "content": "You are a friendly customer support agent called SupportBot. \nAsk questions one by one to collect:\n- order number (e.g. ORD12345)\n- category (shipping, billing, product)\n- description (brief explanation)\n- urgency (low, medium, high)\nIf you already have some info, don't repeat questions, except if the user is giving incorrect format (for example in the order number, in this case you can ask it to give the correct one).\nAsk naturally and one thing at a time."
+      },
+      {
+        "role": "assistant",
+        "content": "Hi! Welcome to TechSavvy Inc. customer support. How can I help you today regarding your order?"
+      },
+      {
+        "role": "user",
+        "content": "Hi im alex"
+      },
+      {
+        "role": "assistant",
+        "content": "Hi Alex! Nice to meet you. Could you please provide your order number? It usually looks like \"ORD\" followed by some digits, for example, ORD12345."
+      },
+      {
+        "role": "user",
+        "content": "ORD123456"
+      },
+      {
+        "role": "assistant",
+        "content": "Thank you, Alex. Now, could you tell me which category your issue falls into? Is it related to shipping, billing, or the product?"
+      },
+      {
+        "role": "user",
+        "content": "shipping"
+      },
+      {
+        "role": "assistant",
+        "content": "Thanks for that information, Alex. Could you please give me a brief description of the issue you're experiencing with the shipping?"
+      },
+      {
+        "role": "user",
+        "content": "the package hasnt arrived"
+      },
+      {
+        "role": "assistant",
+        "content": "Got it. How urgent is this issue for you? Would you say it's low, medium, or high urgency?"
+      },
+      {
+        "role": "user",
+        "content": "medium"
+      },
+      {
+        "role": "developer",
+        "content": "So far these are the notes that you have taken, please use this notes to dirrect your questions to the missing information, remember that certain fields need specific formats: {'order_number': 'ORD123456', 'category': 'shipping', 'description': \"the package hasn't arrived.\", 'urgency': 'medium'}"
+      }
+    ],
+    "extracted": {
+      "order_number": "ORD123456",
+      "category": "shipping",
+      "description": "the package hasn't arrived.",
+      "urgency": "medium"
+    },
+    "summary": "Customer Alex's package with order number ORD123456 has not arrived yet, and the issue is of medium urgency.",
+    "frustration_score": 0,
+    "lang": "en"
+  },
+  {
+    "timestamp": "2025-04-22T01:49:19.725008",
+    "mode": "natural",
+    "conversation": [
+      {
+        "role": "system",
+        "content": "You are a friendly customer support agent called SupportBot. \nAsk questions one by one to collect:\n- order number (e.g. ORD12345)\n- category (shipping, billing, product)\n- description (brief explanation)\n- urgency (low, medium, high)\nIf you already have some info, don't repeat questions, except if the user is giving incorrect format (for example in the order number, in this case you can ask it to give the correct one).\nAsk naturally and one thing at a time."
+      },
+      {
+        "role": "assistant",
+        "content": "Hi! Welcome to TechSavvy Inc. customer support. How can I help you today regarding your order?"
+      },
+      {
+        "role": "user",
+        "content": "My name is Alex and I have a problem with my order."
+      },
+      {
+        "role": "assistant",
+        "content": "Hi Alex! Thanks for reaching out. Could you please provide me with your order number? It usually looks like this: ORD12345."
+      },
+      {
+        "role": "user",
+        "content": "Hi, my order number is ORT-123456."
+      },
+      {
+        "role": "assistant",
+        "content": "Thank you for providing the order number. It looks like the format might be slightly off. Could you please double-check and give me the correct order number? It should look like this: ORD12345."
+      },
+      {
+        "role": "user",
+        "content": "Yes, my order is Ord 1 2 3 4 5 6"
+      },
+      {
+        "role": "assistant",
+        "content": "Thanks for clarifying, Alex. Could you please provide me with the category of your issue? Is it related to shipping, billing, or the product itself?"
+      },
+      {
+        "role": "user",
+        "content": "It's related to a billing"
+      },
+      {
+        "role": "assistant",
+        "content": "Got it, Alex. Now, could you please briefly describe the billing issue you're experiencing?"
+      },
+      {
+        "role": "user",
+        "content": "Yes, I have been charged around 20% higher than the actual price on the website."
+      },
+      {
+        "role": "assistant",
+        "content": "Thank you for sharing that, Alex. How urgent is this issue for you? Would you say it's low, medium, or high urgency?"
+      },
+      {
+        "role": "user",
+        "content": "."
+      },
+      {
+        "role": "assistant",
+        "content": "Thanks for the details, Alex. I just need to confirm your order number again to make sure I have the right information. Could you please provide it in the format like ORD12345?"
+      },
+      {
+        "role": "user",
+        "content": "Yes, the format is ORD123456."
+      },
+      {
+        "role": "assistant",
+        "content": "Thank you for confirming your order number, Alex. I see that your issue is related to billing, specifically being charged more than the listed price. How urgent would you say this issue is\u2014low, medium, or high?"
+      },
+      {
+        "role": "user",
+        "content": "Quite high, like I've been charged extra, I want my money back."
+      },
+      {
+        "role": "developer",
+        "content": "So far these are the notes that you have taken, please use this notes to dirrect your questions to the missing information, remember that certain fields need specific formats: {'category': 'billing', 'description': 'the billing issue is that the user was charged around 20% higher than the actual price on the website.', 'order_number': 'ORD123456', 'urgency': 'high'}"
+      }
+    ],
+    "extracted": {
+      "category": "billing",
+      "description": "the billing issue is that the user was charged around 20% higher than the actual price on the website.",
+      "order_number": "ORD123456",
+      "urgency": "high"
+    },
+    "summary": "The customer, Alex, has an order with the number ORD123456. They are experiencing a billing issue where they were charged approximately 20% more than the listed price on the website. The issue is quite urgent, and they are seeking a refund for the overcharged amount.",
+    "frustration_score": 7,
+    "lang": "en"
+  }
+]
