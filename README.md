@@ -1,4 +1,4 @@
-# Customer Support Bot - README
+# SupportBot - AI-Powered Customer Support Agent - README
 
 ## Overview
 
@@ -28,7 +28,7 @@ Before setting up the project, make sure you have the following dependencies:
 
 - **Audio Input Setup**: If you want to use the voice input functionality, you need to have a microphone set up and ensure your system has the necessary drivers for audio input.
 
-- **LLM Model**: The system requires an LLM model for audio transcription and text-to-speech conversion. This should be integrated in the `UserIO` class, specifically the `llm_model` argument. Local mode using Mistral 7B running with Ollama (Do not support TTS or STT) and Cloud mode using openAI API. This means that you will need a OPENAI_API_KEY enviroment variable, with a valid KEY. Default mode OpenAI (Since local model is small 7b performance is really low, recomended cloud)
+- **LLM Model**: The system requires an LLM model for audio transcription and text-to-speech conversion. This should be integrated in the `UserIO` class, specifically the `llm_model` argument. Local mode using Mistral 7B running with Ollama (Do not support TTS or STT) and Cloud mode using openAI API. This means that you will need a `OPENAI_API_KEY` enviroment variable, with a valid KEY. Default mode OpenAI (Since local model is small 7b performance is really low, recomended cloud)
 
 
 ### Installing and Running
@@ -41,12 +41,14 @@ Before setting up the project, make sure you have the following dependencies:
 
 2. **Create a virtual enviroment with python 3.12 and activate it**:
     Run the following command to create the Python virtual enviroment:
-    For Windows
+    - For Windows
 ```bash
    python -m venv .venv
    .venv\Scripts\activate
 ```
-    For Linux
+
+    - For Linux
+
 ```bash
    python -m venv .venv
    source .venv/bin/activate
@@ -58,7 +60,10 @@ Before setting up the project, make sure you have the following dependencies:
    pip install -r requirements.txt
 ```
 
-4. **Run the Application**:
+4. **Add a `OPENAI_API_KEY` enviroment variable**:
+   Get an openai api key and add it to the enviroment variables If running openai module. If running ollama mistral module install ollama (https://ollama.com/)
+
+5. **Run the Application**:
    After setting up the dependencies, you can run the bot by invoking the main script. If you’re running the bot with text input, it will simply await the user’s input in the terminal:
 ```bash
    python app/main.py
@@ -125,6 +130,10 @@ The system architecture of the Customer Support Bot consists of several intercon
 ### 4. **Error Handling and Robustness**:
    - The code includes error handling mechanisms for situations like failed audio transcription, ensuring that the system doesn't crash unexpectedly. Additionally, the audio file is cleaned up after processing to avoid unnecessary file accumulation.
 
+### 5. Rigid / Natural mode:
+    - The bot operates in either "rigid" mode (strict question flow) or "natural" mode (more conversational and flexible).
+
+
 ---
 
 ## Description of Potential Improvements
@@ -135,7 +144,7 @@ The system architecture of the Customer Support Bot consists of several intercon
 ### 2. **Dynamic Multilingual Support**:
    - Although the bot supports language flexibility, currently only two language files (`en.json`, `es.json`) are provided for prompts. To support global users, more language files can be added, and the bot can detect the user’s language preference dynamically. Even though OpenAI models are robust enough to handle input in a different language than the one selected, this can lead to undesired results or misinterpretations.
    
-### 3. **Advanced dynamic Frustration Detection**:
+### 3. **Advanced Dynamic Frustration Detection**:
    - Currently, frustration is scored by the LLM model at the end of the conversation. However, we can detect frustration in real time based on user behavior, sentiment analysis of text, or tone in audio input. This would allow for more automated and dynamic tracking of customer sentiment during the conversation, enabling escalation to a human agent if frustration levels become dangerously high or continue to rise.
    
 ### 4. **Audio Output Enhancement**:
@@ -158,129 +167,3 @@ Contributions are welcome! If you'd like to improve this project, feel free to f
 ## License
 
 This project is licensed under the Apahce 2.0 License. See the [LICENSE](LICENSE) file for more information.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# SupportBot - AI-Powered Customer Support Agent
-
-SupportBot is an AI-driven customer support agent designed to assist in gathering essential information from users in a friendly and efficient manner. The bot uses natural language processing (NLP) to extract key details such as order numbers, categories of issues (shipping, billing, product-related), descriptions, and urgency levels. It provides a smooth customer support experience by collecting, validating, and summarizing customer queries.
-
-## Features
-
-- **Intelligent Conversation Flow**: SupportBot asks users questions based on a predefined structure, ensuring all necessary information is collected.
-- **Natural and Rigid Modes**: The bot operates in either "rigid" mode (strict question flow) or "natural" mode (more conversational and flexible).
-- **Order History Integration**: The bot can retrieve past conversations related to a specific order number to provide continuity and avoid repetition.
-- **Issue Validation**: SupportBot checks the validity of the information provided by the user and prompts for corrections if necessary.
-- **Supervisor Validation**: The bot integrates with a supervisor agent to ensure that all extracted information meets the requirements.
-- **Customizable Prompts**: You can define the prompts and messages in different languages to tailor the bot's behavior to your needs.
-
-## Installation
-
-To use **SupportBot**, clone this repository and install the required dependencies.
-
-### Clone the repository:
-
-```bash
-git clone https://github.com/athanatos96/CustomerSupportAgent.git
-cd supportbot
-```
-
-### Install the required packages:
-
-```bash
-pip install -r requirements.txt
-```
-
-## Configuration
-
-1. **Model Integration**: SupportBot relies on an AI model for natural language processing tasks (e.g., GPT, BERT, or any custom NLP model). Ensure the model is properly set up and integrated before running the agent.
-2. **Prompts Configuration**: The bot uses customizable prompts that can be found in the `prompts/` directory. Edit these prompts to adjust the questions and responses to match your company's needs.
-3. **Order History**: To enable order history functionality, ensure that the `list_all_orders()` and `load_conversations()` functions are properly integrated with your order database or logs.
-
-## Usage
-
-### Starting the Agent
-
-You can start the customer support agent in either "rigid" or "natural" mode by creating an instance of the `CustomerSupportAgent` class.
-
-#### Example (Rigid Mode):
-```python
-from app.agent.customer_support_agent import CustomerSupportAgent
-
-# Initialize the support bot in "rigid" mode
-support_bot = CustomerSupportAgent(model=your_model_instance, mode="rigid", company="YourCompany")
-support_bot.start()
-```
-
-#### Example (Natural Mode):
-```python
-from app.agent.customer_support_agent import CustomerSupportAgent
-
-# Initialize the support bot in "natural" mode
-support_bot = CustomerSupportAgent(model=your_model_instance, mode="natural", company="YourCompany")
-support_bot.start()
-```
-
-### Conversation Flow
-
-1. **Order Number**: The bot will prompt the user for an order number (e.g., `ORD12345`).
-2. **Category**: The bot will ask about the issue category (shipping, billing, product).
-3. **Description**: The user provides a brief explanation of the issue.
-4. **Urgency**: The user specifies the urgency level (low, medium, high).
-5. **Validation**: The bot checks if the provided information is correct. If something is missing or incorrect, it will prompt the user for clarification.
-6. **Supervisor Review**: After gathering all required information, the bot escalates the conversation to a supervisor for validation and correction if needed.
-7. **History Integration**: If the user provides an order number, the bot will check for past conversations and include relevant history in the conversation.
-
-## Customization
-
-You can customize the behavior of SupportBot by modifying the following:
-
-- **Prompts**: Update the questions and instructions in the `prompts/` directory.
-- **Supervisor Validation**: The bot includes a supervisor agent for validation. You can adjust its behavior and requirements as needed.
-- **Mode**: Choose between "rigid" (strict question flow) and "natural" (more flexible and conversational).
-
-## Requirements
-
-- Python 3.7+
-- Dependencies listed in `requirements.txt` (such as `openai`, `requests`, etc.)
-- A pre-trained language model (like GPT or any other NLP model)
-
-## Contributing
-
-We welcome contributions to SupportBot! If you have ideas for improvements or new features, feel free to open an issue or submit a pull request.
-
-### Steps to contribute:
-
-
-1. Fork the repository.
-2. Create a new branch (`git checkout -b feature-name`).
-3. Make your changes and test them.
-4. Commit your changes (`git commit -am 'Add new feature'`).
-5. Push to the branch (`git push origin feature-name`).
-6. Create a pull request.
-
-
-## License
-
-SupportBot is open-source software licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
-
-## Contact
-
-For support or inquiries, feel free to reach out to us at [support@example.com].
