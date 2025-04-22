@@ -112,6 +112,12 @@ Before setting up the project, make sure you have the following dependencies:
 ```
 
 ### Option 3: **Executable**
+
+#### Prerequisites
+
+- **LLM Model OPENAI_API_KEY env vars**: The system requires an LLM model for audio transcription and text-to-speech conversion. This should be integrated in the `UserIO` class, specifically the `llm_model` argument. Local mode using Mistral 7B running with Ollama (Do not support TTS or STT) and Cloud mode using openAI API. This means that you will need a `OPENAI_API_KEY` enviroment variable, with a valid KEY. Default mode OpenAI (Since local model is small 7b performance is really low, recomended cloud)
+
+
 1. **Run executable**:
 ```bash
    SupportBot.exe
