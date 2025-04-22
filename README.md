@@ -85,6 +85,8 @@ Before setting up the project, make sure you have the following dependencies:
 
 - **Audio Input Setup**: NOT Supported, set `AUDIO_MODE` to False in `main.py`, if running docker from windows. Not tested in running docker from linux (uncomment the `devices` in docker-compose.yml and try)
 
+- **No Support for Ollama**: If wanted to run local Ollama to run mistral 7b, install ollama in the docker https://ollama.com/
+
 #### Installing and Running
 
 1. **Clone the Repository**:
@@ -117,6 +119,7 @@ Before setting up the project, make sure you have the following dependencies:
 
 - **LLM Model OPENAI_API_KEY env vars**: The system requires an LLM model for audio transcription and text-to-speech conversion. This should be integrated in the `UserIO` class, specifically the `llm_model` argument. Local mode using Mistral 7B running with Ollama (Do not support TTS or STT) and Cloud mode using openAI API. This means that you will need a `OPENAI_API_KEY` enviroment variable, with a valid KEY. Default mode OpenAI (Since local model is small 7b performance is really low, recomended cloud)
 
+- **Support for Ollama**: If wanted to run local Ollama to run mistral 7b, install ollama https://ollama.com/
 
 1. **Run executable**:
 ```bash
