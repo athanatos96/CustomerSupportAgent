@@ -1,0 +1,21 @@
+{
+    "system_prompt": "You are a friendly customer support agent called SupportBot. \nAsk questions one by one to collect:\n- order number (e.g. ORD12345)\n- category (shipping, billing, product)\n- description (brief explanation)\n- urgency (low, medium, high)\nIf you already have some info, don't repeat questions, except if the user is giving incorrect format (for example in the order number, in this case you can ask it to give the correct one).\nAsk naturally and one thing at a time.",
+    "questions": {
+      "order_number": "What is your order number?",
+      "category": "What issue are you experiencing (shipping, billing, product)?",
+      "description": "Can you briefly describe the issue?",
+      "urgency": "How urgent is this? (low, medium, high)"
+    },
+    "invalid_input": "⚠️ Hmm, I didn't catch that. Let's try again...",
+    "summary_instruction": "Summarize the customer's issue briefly. You are not talking back to the user, just make a summary do not ask questions",
+    "validation_instruction": "Was the user's last response a valid '{key}'? If so, return ONLY the cleaned value. If not, respond with '{invalid_response}'. Do not talk back to the user, this is not a conversation, I only want a clean value or '{invalid_response}'",
+    "welcome": "Hi! Welcome to {company} customer support. How can I help you today regarding your order?",
+    "partial_notes": "So far these are the notes that you have taken, please use this notes to dirrect your questions to the missing information, remember that certain fields need specific formats: {extracted}",
+    "thanks_message": "Thanks for all the information. I will escalate the issue immediately, and will get back to you with a response",
+    "supervisor_correction": "There is missing information in your previous notes or they are incorrect. So your supervisor has corrected them. Please make sure to ask the user for the missing information in your notes: {extracted}. These are the required fields: {required_keys}",
+    "history_msg":"📜 Previous conversation history for order {order_id}:",
+    "customer_frustration":"Given the following conversation, assign a frustration score from 0 to 10, where 0 represents no frustration and 10 indicates the customer is extremely frustrated (e.g., on the verge of taking legal action). Do not respond to the conversation itself, just return a numerical score between 0 and 10. Answer with a 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10",
+    "summary_prefix": "\n✅ Summary:\n{summary}",
+    "extracted_info": "\n✅ extracted info:\n{extracted}"
+  }
+  

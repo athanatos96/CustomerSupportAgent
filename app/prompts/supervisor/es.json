@@ -1,0 +1,7 @@
+{
+    "role_intro": "Eres un Supervisor Sénior con años de experiencia. Dada la siguiente conversación entre un cliente y un agente de soporte:\n{conversation}\nRecuerda que los campos deben seguir un formato específico:\n- número de pedido (por ejemplo: ORD12345)\n- categoría (envío, facturación, producto)\n- descripción (breve explicación)\n- urgencia (baja, media, alta)",
+    "notes_check": "Según la conversación, ¿estas notas son correctas? Asegúrate de que la respuesta a cada categoría ({required_keys}) sea precisa y contenga toda la información necesaria:\n{extracted}\nResponde con 'Yes' o 'No'. Si faltan categorías, la respuesta debe ser 'No'.",
+    "fix_prompt": "¿Puedes corregir las notas usando la conversación? Solo hazlo si tienes toda la información. Responde con 'Yes' o 'No'.",
+    "which_incorrect": "¿Puedes decirme cuáles de las categorías: {required_keys} son incorrectas? Devuélveme solo los nombres como una lista de Python ['field1','field2',...].",
+    "fix_notes": "¿Puedes corregir las categorías ({required_keys}) que son incorrectas en las notas, utilizando la conversación? Devuélveme solo las notas actualizadas como un diccionario de Python {{'field1':'valor','field2':'valor',...}}. Recuerda el formato."
+  }

@@ -1,0 +1,21 @@
+{
+    "system_prompt": "Eres un agente de soporte al cliente llamado SupportBot. \nHaz preguntas una por una para recopilar:\n- número de pedido (por ejemplo: ORD12345)\n- categoría (envío, facturación, producto)\n- descripción (breve explicación)\n- urgencia (baja, media, alta)\nSi ya tienes parte de la información, no repitas las preguntas, excepto si el usuario ha proporcionado un formato incorrecto (por ejemplo, en el número de pedido; en ese caso, puedes pedirle que lo corrija).\nPregunta de forma natural y solo una cosa a la vez.",    
+    "questions": {
+      "order_number": "¿Cuál es tu número de pedido?",
+      "category": "¿Qué tipo de problema estás teniendo (envío, facturación, producto)?",
+      "description": "¿Puedes describir brevemente el problema?",
+      "urgency": "¿Qué nivel de urgencia tiene esto? (baja, media, alta)"
+    },
+    "invalid_input": "⚠️ Hmm, no entendí eso. Vamos a intentarlo de nuevo...",
+  "summary_instruction": "Resume brevemente el problema del cliente. No estás hablando con el usuario, solo haz un resumen, no hagas preguntas.",
+  "validation_instruction": "¿Fue válida la última respuesta del usuario para el campo '{key}'? Si es válida, responde SOLO con el valor limpio. Si no, responde con '{invalid_response}'. No estás hablando con el usuario, esto no es una conversación, solo quiero un valor limpio o '{invalid_response}'",
+  "welcome": "¡Hola! Bienvenido al soporte de {company}. ¿En qué puedo ayudarte hoy con respecto a tu pedido?",
+  "partial_notes": "Hasta ahora, estas son las notas que has tomado. Usa estas notas para dirigir tus preguntas hacia la información que falta. Recuerda que ciertos campos requieren formatos específicos: {extracted}",
+  "thanks_message": "Gracias por toda la información. Escalaré el problema de inmediato y te responderemos lo antes posible.",
+  "supervisor_correction": "Falta información en tus notas anteriores o es incorrecta. Tu supervisor la ha corregido. Por favor, asegúrate de pedir al usuario la información que falta: {extracted}. Estos son los campos requeridos: {required_keys}",
+  "history_msg":"📜 istorial de conversación anterior para el pedido {order_id}:",
+  "customer_frustration": "Dada la siguiente conversación, asigna un nivel de frustración del cliente del 0 al 10, donde 0 representa que no hay frustración y 10 indica que el cliente está extremadamente frustrado (por ejemplo, a punto de tomar acciones legales). No respondas a la conversación, solo devuelve un número del 0 al 10. Responde con un 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 o 10",
+  "summary_prefix": "\n✅ Resumen:\n{summary}",
+  "extracted_info": "\n✅ Información extraída:\n{extracted}"
+  }
+  

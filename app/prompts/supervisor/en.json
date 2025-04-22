@@ -1,0 +1,8 @@
+{
+    "role_intro": "You are a Senior Supervisor with years of experience. Given the following conversation between a customer and a customer support agent:\n{conversation}\nRemember that the fields need to follow a specific format: \n- order number (e.g. ORD12345)\n- category (shipping, billing, product)\n- description (brief explanation)\n- urgency (low, medium, high)",
+    "notes_check": "Given the conversation, are these notes correct? Make sure the response to each category ({required_keys}) is accurate and contains all the necessary information:\n{extracted}\nAnswer with a 'Yes' or 'No'. If there are missing categories the answer should be No",
+    "fix_prompt": "Can you fix the notes with the conversation? Only do it if you have all the information. Answer with a 'Yes' or 'No'.",
+    "which_incorrect": "Can you tell me which of the categories: {required_keys} are incorrect? Just return me the names as a Python list ['field1','field2',...].",
+    "fix_notes": "Can you fix the categories ({required_keys}) that are incorrect in the notes, using the conversation? Just return the updated notes as a Python dictionary {{'field1':'value','field2':'value',...}}. Remember the format."
+}
+  
