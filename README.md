@@ -216,6 +216,9 @@ The system architecture of the Customer Support Bot consists of several intercon
 ### 6. **RAG implementation**:
    - Implementing a knowledga base to give supported answers based on common customer issues
 
+### 7. **Speed**:
+   - If audio mode selected can run multimodal llm like Qwen, in order to dirrectly work on audio, no need for TTS or STT during inference, needed STT for logs, but can run in different thread.
+   - Run Supervisor in a different thread to speed operations of main agent, no wait time for supervisor to finished.
 ---
 
 ## Contributing
