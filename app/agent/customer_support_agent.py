@@ -11,18 +11,9 @@ from app.utils.prompt_loader import load_prompts
 
 
 
-SYSTEM_PROMPT = """You are a friendly customer support agent called SupportBot. 
-Ask questions one by one to collect:
-- order number (e.g. ORD12345)
-- category (shipping, billing, product)
-- description (brief explanation)
-- urgency (low, medium, high)
-If you already have some info, don't repeat questions.
-Ask naturally and one thing at a time.
-"""
 
 REQUIRED_KEYS = ["order_number", "category", "description", "urgency"]
-
+MAX_MSG = 50
 
 class CustomerSupportAgent:
     check_every_n_msg = 3 # After how many msg the suppervisor is going to check the work of the customer agent
@@ -133,7 +124,7 @@ class CustomerSupportAgent:
 
         msgs_count = 1 # count the msg wiht the user
 
-        while not self._all_info_collected():
+        while not self._all_info_collected() and msgs_count < MAX_MSG: # To prevent infinite conversations
             # remove all past developer comments, this is done to track only the conversation + the last notes
             self.conversation = self.remove_developer_notes() # clean previous developer coments, and add the new ones
 
